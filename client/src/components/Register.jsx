@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./RegisterLogin.css";
 import { useNavigate } from "react-router-dom";
 
-const Login = ({ setToken }) => {
+const Register = ({ setToken }) => {
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -10,29 +10,28 @@ const Login = ({ setToken }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const login = await loginUser(email, password);
-    console.log(login);
-    setToken(login.token);
+    const register = await registerUser(username, email, password);
+    setToken(register.token);
     setUserName("");
     setEmail("");
     setPassword("");
-    localStorage.setItem("authToken", login.token);
-    navigate("/");
+    // localStorage.setItem("authToken", register.token);
+    navigate("/account");
   };
 
   return (
     <div className="login-container">
       <div className="login-box">
         <form onSubmit={handleSubmit}>
-          <h1>Login</h1>
+          <h1>Register</h1>
 
           <div className="form-group">
-            <label htmlFor="username">Username:</label>
+            <label htmlFor="userName">Username:</label>
             <input
               type="text"
               required
-              name="username"
-              id="username"
+              name="Username"
+              id="userName"
               value={username}
               placeholder="Username"
               onChange={(event) => setUserName(event.target.value)}
@@ -65,11 +64,11 @@ const Login = ({ setToken }) => {
             />
           </div>
 
-          <button type="submit">Login</button>
+          <button type="submit">Register</button>
         </form>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Register;
