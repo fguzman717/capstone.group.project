@@ -1,0 +1,37 @@
+img {
+  width: 80%;
+  height: 60%;
+  background-color: #e8e8e8;
+  margin: 10px;
+}
+
+.item-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.item-card {
+  width: 300px;
+  height: auto;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
+  overflow: visible;
+  text-align: center;
+  margin-top: 50px;
+  padding-bottom: 25px;
+}
+
+.item-name {
+  margin: 10px;
+  font-size: medium;
+}
+
+p {
+  color: black;
+  font-size: small;
+  margin: 25px;
+}
