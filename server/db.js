@@ -70,6 +70,7 @@ const authenticate = async ({ username, password }) => {
   return { token };
 };
 
+// USER TABLE FUNCTION 
 // create a function that fetches all users from the users table
 const fetchUsers = async () => {
   try {
@@ -83,6 +84,27 @@ const fetchUsers = async () => {
   }
 };
 
+// USER TABLE FUNCTION 
+const fetchSingleUser = async ({ user_id }) => {
+  try {
+    const SQL = `
+    SELECT * FROM capstone_users
+    WHERE user_id = $1;
+    `;
+    const response = await client.query(SQL, [user_id]);
+
+    if (response.rows.length === 0) {
+      throw new Error(`User Not Found`);
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
+// ITEMS TABLE FUNCTION 
+// ADMIN ONLY FUNCTION 
 // create a function that adds an item to the items table
 const createItem = async ({
   item_name,
@@ -92,7 +114,7 @@ const createItem = async ({
 }) => {
   try {
     const SQL = `
-    INSERT INTO capstone_items (item_name, item_imgurl,item_category_primary,
+    INSERT INTO capstone_items (item_name, item_imgurl, item_category_primary,
     item_category_secondary)
     VALUES ($1,$2,$3,$4)
     RETURNING *`;
@@ -107,7 +129,9 @@ const createItem = async ({
   }
 };
 
-// create a function that fetches all items from the users items
+// ITEMS TABLE FUNCTION 
+// create a function that fetches all items from the users items 
+// What do we mean by users items? it's just fetching all the restaurants.
 const fetchItems = async () => {
   try {
     const SQL = `
@@ -120,6 +144,7 @@ const fetchItems = async () => {
   }
 };
 
+// ITEMS TABLE FUNCTION
 // create a function to fetch a single item from the items table
 const fetchSingleItem = async ({ item_id }) => {
   try {
@@ -139,6 +164,8 @@ const fetchSingleItem = async ({ item_id }) => {
   }
 };
 
+// ITEMS TABLE FUNCTION
+// ADMIN ONLY FUNCTION 
 // create a function to delete an item by its ID from the items table
 const deleteItems = async ({ item_id }) => {
   try {
@@ -163,6 +190,21 @@ const deleteItems = async ({ item_id }) => {
   }
 };
 
+// ITEMS TABLE FUNCTION 
+// create a function to display restaurants by category
+const fetchItemsByCategory = async () => {
+  try {
+    const SQL = `
+    SELECT * FROM capstone_items GROUP BY item_category_primary;
+    `;
+    const response = await client.query(SQL);
+    return response.rows;
+  } catch (error) {
+    console.error("there was an error getting restaurants by category", error);
+  }
+};
+
+// REVIEWS TABLE FUNCTION 
 // create a function that adds a review to the reviews table
 async function createReview({ comment_text, review_id, user_id }) {
   try {
@@ -179,6 +221,7 @@ async function createReview({ comment_text, review_id, user_id }) {
   }
 }
 
+// REVIEWS TABLE FUNCTION 
 // create a function that fetches all reviews from the user's reviews
 const fetchReviews = async (user_id) => {
   try {
@@ -196,6 +239,7 @@ const fetchReviews = async (user_id) => {
   }
 };
 
+// REVIEWS TABLE FUNCTION 
 // create a function that deletes a review from the user's reviews
 async function deleteReview({ review_id }) {
   try {
@@ -209,6 +253,7 @@ async function deleteReview({ review_id }) {
   }
 }
 
+// COMMENTS TABLE FUNCTION 
 // create a function that adds an comment to the comments table
 async function createComment({ comment_text, review_id, user_id }) {
   try {
@@ -225,6 +270,7 @@ async function createComment({ comment_text, review_id, user_id }) {
   }
 }
 
+// COMMENTS TABLE FUNCTION 
 // create a function that fetches all comments from the user's comments
 const fetchComments = async (user_id) => {
   try {
@@ -242,6 +288,7 @@ const fetchComments = async (user_id) => {
   }
 };
 
+// COMMENTS TABLE FUNCTION 
 // create a function that deletes a comment from the user's comments
 async function deleteComment({ comment_id }) {
   try {
@@ -251,11 +298,25 @@ async function deleteComment({ comment_id }) {
     console.log(`record ${comment_id} has been removed`);
   } catch (error) {
     console.error(
-      "there was an error deleteing a record in the comments table",
+      "There was an error deleting a record in the comments table",
       error
     );
   }
 }
+
+// COMMENTS TABLE FUNCTION
+// create a function for users to update their own comments
+const updateComment = async ( comment_id ) => {
+  try {
+  //  const affectedComment = 
+    const SQL = `
+    UPDATE review_comments SET comment_text = userText;
+    `
+  } catch () {
+    
+  }
+}
+
 
 module.exports = {
   client,
@@ -272,4 +333,7 @@ module.exports = {
   createComment,
   fetchComments,
   deleteComment,
+  fetchItemsByCategory, 
+  updateComment,
+  fetchSingleUser
 };
