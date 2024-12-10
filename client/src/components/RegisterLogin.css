@@ -10,7 +10,6 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: grey;
 }
 
 .login-box {
@@ -47,7 +46,7 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 1rem;
-  color: #333;
+  color: #fff;
   transition: border 0.3s ease-in-out;
 }
 
