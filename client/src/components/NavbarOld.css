@@ -1,9 +1,20 @@
-.nav {
+* {
   box-sizing: border-box;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
-  background-color: rgb(4, 58, 64);
-  color: rgb(217, 149, 24);
+}
+
+body {
+  margin: 0;
+}
+
+.container {
+  margin: 1rem;
+  text-align: center;
+}
+
+.nav {
+  /* styling to be added */
+  background-color: #333;
+  color: white;
   display: flex;
   justify-content: space-between;
   align-items: stretch;
@@ -32,11 +43,7 @@
   padding: 0.25rem;
 }
 
-/* .admin-only {
-  visibility: hidden;
-} */
-
-/* .nav li.hover {
+.nav li.hover {
   background-color: TBA;
 }
 
@@ -47,4 +54,4 @@
 .nav.login {
   background-color: blue;
   font-weight: 150;
-} */
+}

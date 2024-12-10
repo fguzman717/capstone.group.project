@@ -10,7 +10,7 @@ const Login = ({ setToken }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const login = await loginUser(email, password);
+    const login = await loginUser(email, password); // should this be username and pw?
     console.log(login);
     setToken(login.token);
     setUserName("");
