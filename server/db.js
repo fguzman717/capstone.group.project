@@ -53,8 +53,8 @@ const createTables = async () => {
 // create a function that authenticates a user
 const authenticate = async ({ username, password }) => {
   const SQL = `
-    SELECT id, password
-    FROM users
+    SELECT user_id, password
+    FROM capstone_users
     WHERE username = $1
   `;
   const response = await client.query(SQL, [username]);
@@ -66,7 +66,7 @@ const authenticate = async ({ username, password }) => {
     error.status = 401;
     throw error;
   }
-  const token = await jwt.sign({ id: response.rows[0].id }, JWT);
+  const token = await jwt.sign({ user_id: response.rows[0].user_id }, JWT);
   return { token };
 };
 
