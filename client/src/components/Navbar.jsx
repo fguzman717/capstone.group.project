@@ -3,10 +3,8 @@ import { Link } from "react-router-dom";
 import { isLoggedIn } from "./auth/isLoggedIn";
 import { Login } from "./Login";
 import { fetchSingleUser } from "../../../server/db";
-//import { to } from "react";
 
 export default function Navbar() {
-  //() => {
   const userPrivileges = fetchSingleUser.response.isAdmin;
 
   if (!isLoggedIn) {
