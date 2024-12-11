@@ -70,3 +70,48 @@ p {
 .item-category-secondary {
   color: #28a745;
 }
+.single-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.single-name {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.single-item img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.single-item p {
+  font-size: 1rem;
+  color: #555;
+  margin: 5px 0;
+}
+
+.single-item a {
+  font-size: 1rem;
+  color: #007bff;
+  text-decoration: none;
+  margin-top: 20px;
+}
+
+.single-item a:hover {
+  text-decoration: underline;
+}

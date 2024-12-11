@@ -5,6 +5,7 @@ import GetAll from "./components/GetAllItems.jsx";
 import Navbar from "./components/Navbar.jsx";
 import Login from "./components/Login.jsx";
 import Register from "./components/Register.jsx";
+import SingleItemView from "./components/SingleItem.jsx";
 import About from "./components/About.jsx";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/items" element={<GetAll />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/item/:id" element={<SingleItemView />} />
         <Route path="/about" element={<About />} />
       </Routes>
     </div>

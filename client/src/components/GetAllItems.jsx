@@ -15,13 +15,13 @@ const GetAll = () => {
         console.error("Error fetching all items!", error);
       }
     };
+    console.log(items);
     fetchAllItems();
   }, []);
 
   if (!items) {
     return <div>Loading ...</div>;
   }
-
   return (
     <div className="item-container">
       {items.map((item) => {
