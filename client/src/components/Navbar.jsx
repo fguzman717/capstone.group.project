@@ -1,7 +1,7 @@
 import "./Navbar.css";
 import { Link } from "react-router-dom";
-import { isLoggedIn } from "./isLoggedIn";
-// import { Login } from "./Login";
+import { isLoggedIn } from "./auth/isLoggedIn";
+import { Login } from "./Login";
 import { fetchSingleUser } from "../../../server/db";
 
 export default function Navbar() {
@@ -25,7 +25,7 @@ export default function Navbar() {
     // only present the login and the site title
   }
 
-  if (isLoggedIn && userPrivileges === false) {
+  if (isLoggedIn && (userPrivileges = false)) {
     // show all except admin
     return (
       <nav className="nav">
@@ -50,7 +50,7 @@ export default function Navbar() {
     );
   }
 
-  if (isLoggedIn && userPrivileges === true) {
+  if (isLoggedIn && (userPrivileges = true)) {
     return (
       <nav className="nav">
         <Link to="/" className="site-title">
