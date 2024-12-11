@@ -14,6 +14,9 @@ const {
   createComment,
   fetchComments,
   deleteComment,
+  fetchItemsByCategory, 
+  updateComment,
+  fetchSingleUser
 } = require("./db");
 const express = require("express");
 const app = express();
@@ -114,7 +117,7 @@ app.get("/api/users/:id/reviews", async (req, res) => {
 });
 
 // connect a route to post reviews
-app.post("/api/review", async (req, res) => {
+app.post("/api/reviews", async (req, res) => {
   const [item_id, review_title, review_text, review_rating, user_id] = req.body;
   const makeReview = createReview(
     item_id,
@@ -126,7 +129,14 @@ app.post("/api/review", async (req, res) => {
   res.status(200).json({ makeReview });
 });
 
-// connect a route to delete reviews
+// // connect a route to delete a review
+// app.delete("/api/reviews/:id", async (req, res) => {
+//   await deleteReview({ review_id: req.params.id });
+//   res.sendStatus(204);
+// });
+
+// this appears to be a route for users to delete their own reviews 
+// connect a route to delete reviews 
 app.delete("/api/users/:userId/reviews/:reviewId", async (req, res, next) => {
   try {
     // Check if the logged-in user is authorized to delete the review
@@ -164,7 +174,6 @@ app.delete("/api/comment", async (req, res) => {
   await deleteComment(commentId);
   res.status(200).json({ message: "record has been deleted successfully" });
 });
-
 // update review
 app.put("/api/reviews/:reviewId", async (req, res) => {
   const { reviewId } = req.params;
@@ -203,7 +212,24 @@ app.put("/api/reviews/:reviewId", async (req, res) => {
     res.status(500).json({ message: "An error occurred while updating the review." });
   }
  }); 
+=======
+// connect a route to list restaurants by category
+app.get("/api/items/:category-primary", async (req, res) => {
+  const items = await fetchItems();
+  res.status(200).send(items);
+});
 
+// connect a route to update a comment
+app.put("/api/comments/:comment_id", async (req, res) => {
+  app.put("/api/comments", async (req, res) => {
+    const comment_id = req.params.id;
+    const { comment_text } =
+      req.body;
+    const reviseComment = await updateComment(
+      comment_text
+    );
+    res.status(200).json({ updateComment });
+  }) };
 const init = async () => {
   await client.connect();
   console.log("connected to database");
