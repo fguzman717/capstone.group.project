@@ -174,7 +174,45 @@ app.delete("/api/comment", async (req, res) => {
   await deleteComment(commentId);
   res.status(200).json({ message: "record has been deleted successfully" });
 });
-
+// update review
+app.put("/api/reviews/:reviewId", async (req, res) => {
+  const { reviewId } = req.params;
+  const { review_title, review_text, review_rating } = req.body; 
+  const user_id = req.user.id; 
+ 
+ 
+// review rating
+  if (review_rating <= 0 || review_rating > 10) {
+    return res.status(400).json({ message: "Rating must be between 1 and 10." });
+  }
+ 
+  // Update the review in the database
+  try {
+    const result = await client.query(
+      `
+      UPDATE item_reviews
+      SET review_title = $1, review_text = $2, review_rating = $3
+      WHERE review_id = $4 AND user_id = $5
+      RETURNING *;
+      `,
+      [review_title, review_text, review_rating, reviewId, user_id]
+    );
+ 
+ 
+    if (result.rows.length > 0) {
+      res.status(200).json({
+        message: "Review updated successfully!",
+        updatedReview: result.rows[0],
+      });
+    } else {
+      res.status(404).json({ message: "Review not found or you don't have permission to update it." });
+    }
+  } catch (error) {
+    console.error("Error updating review:", error);
+    res.status(500).json({ message: "An error occurred while updating the review." });
+  }
+ }); 
+=======
 // connect a route to list restaurants by category
 app.get("/api/items/:category-primary", async (req, res) => {
   const items = await fetchItems();
@@ -192,11 +230,6 @@ app.put("/api/comments/:comment_id", async (req, res) => {
     );
     res.status(200).json({ updateComment });
   }) };
- 
-
-
-
-
 const init = async () => {
   await client.connect();
   console.log("connected to database");

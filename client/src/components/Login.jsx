@@ -2,6 +2,8 @@ import { useState } from "react";
 import "./RegisterLogin.css";
 import { useNavigate } from "react-router-dom";
 
+const baseURL = "APIURLGOESHERE";
+
 const Login = ({ setToken }) => {
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
