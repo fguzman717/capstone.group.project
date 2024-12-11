@@ -37,7 +37,7 @@ const createTables = async () => {
             CHECK (review_rating <= 10),
             item_id INT REFERENCES capstone_items(item_id),
             user_id INT REFERENCES capstone_users(user_id),
-            CONSTRAINT item_user_combo UNIQUE (item_id, user_id)
+            -- CONSTRAINT item_user_combo UNIQUE (item_id, user_id)
         );
 
         CREATE TABLE review_comments (
@@ -53,7 +53,13 @@ const createTables = async () => {
 	(2, 'Segundo_Cliente', 'password456', 'segundocliente@nospam.com', true), 
 	(3, 'Terzo_Cliente', 'password789', 'terzocliente@leavemealone.com', false);  
 
-INSERT INTO item_reviews(review_id, item_id, review_title, review_text, review_rating, user_id)
+  INSERT INTO capstone_items (item_id, item_name, item_imgurl, item_category_primary, item_category_secondary)
+   VALUES 
+   (1, 'Pizza Hut', 'https://logos-world.net/wp-content/uploads/2021/10/Pizza-Hut-Logo.png', 'Pizza', 'Dinner'),
+   (2, 'Starbucks', 'https://upload.wikimedia.org/wikipedia/en/d/d3/Starbucks_Corporation_Logo_2011.svg', 'Coffee', 'Breakfast'), 
+   (3, 'Waffle House', 'https://logos-world.net/wp-content/uploads/2023/08/Waffle-House-Logo.png', 'Waffles', 'Breakfast');
+
+   INSERT INTO item_reviews(review_id, item_id, review_title, review_text, review_rating, user_id)
     VALUES 
     (1, 1, 'Improved quality', 'New Pizza Hut pizzas are better than the old days', 8, 1), 
     (2, 1, 'Not the same', 'Miss the old days', 6, 2), 
@@ -67,7 +73,7 @@ INSERT INTO item_reviews(review_id, item_id, review_title, review_text, review_r
     
  
  	INSERT INTO review_comments (comment_id, comment_text, review_id, user_id)
- 	VALUES (1, 'Completely agree', 1, 1), 
+ 	VALUES (1, 'Completely agree', 1), 
  	(2, 'You are so wrong', 1, 2), 
  	(3, 'Am not', 1, 1), 
  	(4, 'Agreed. Barista is very helpful there.', 5, 1), 
@@ -76,12 +82,7 @@ INSERT INTO item_reviews(review_id, item_id, review_title, review_text, review_r
  	(7, 'Insert dissent here', 2, 2), 
  	(8, 'More comments here', 3, 3); 
  	
- 	 INSERT INTO capstone_items (item_id, item_name, item_imgurl, item_category_primary, item_category_secondary)
-   VALUES 
-   (1, 'Pizza Hut', 'https://logos-world.net/wp-content/uploads/2021/10/Pizza-Hut-Logo.png', 'Pizza', 'Dinner'),
-   (2, 'Starbucks', 'https://upload.wikimedia.org/wikipedia/en/d/d3/Starbucks_Corporation_Logo_2011.svg', 'Coffee', 'Breakfast'), 
-   (3, 'Waffle House', 'https://logos-world.net/wp-content/uploads/2023/08/Waffle-House-Logo.png', 'Waffles', 'Breakfast');
-
+ 	
     
 
             `;
