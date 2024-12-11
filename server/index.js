@@ -14,9 +14,9 @@ const {
   createComment,
   fetchComments,
   deleteComment,
-  fetchItemsByCategory, 
+  fetchItemsByCategory,
   updateComment,
-  fetchSingleUser
+  fetchSingleUser,
 } = require("./db");
 const express = require("express");
 const app = express();
@@ -135,8 +135,8 @@ app.post("/api/reviews", async (req, res) => {
 //   res.sendStatus(204);
 // });
 
-// this appears to be a route for users to delete their own reviews 
-// connect a route to delete reviews 
+// this appears to be a route for users to delete their own reviews
+// connect a route to delete reviews
 app.delete("/api/users/:userId/reviews/:reviewId", async (req, res, next) => {
   try {
     // Check if the logged-in user is authorized to delete the review
@@ -177,15 +177,16 @@ app.delete("/api/comment", async (req, res) => {
 // update review
 app.put("/api/reviews/:reviewId", async (req, res) => {
   const { reviewId } = req.params;
-  const { review_title, review_text, review_rating } = req.body; 
-  const user_id = req.user.id; 
- 
- 
-// review rating
+  const { review_title, review_text, review_rating } = req.body;
+  const user_id = req.user.id;
+
+  // review rating
   if (review_rating <= 0 || review_rating > 10) {
-    return res.status(400).json({ message: "Rating must be between 1 and 10." });
+    return res
+      .status(400)
+      .json({ message: "Rating must be between 1 and 10." });
   }
- 
+
   // Update the review in the database
   try {
     const result = await client.query(
@@ -197,22 +198,24 @@ app.put("/api/reviews/:reviewId", async (req, res) => {
       `,
       [review_title, review_text, review_rating, reviewId, user_id]
     );
- 
- 
+
     if (result.rows.length > 0) {
       res.status(200).json({
         message: "Review updated successfully!",
         updatedReview: result.rows[0],
       });
     } else {
-      res.status(404).json({ message: "Review not found or you don't have permission to update it." });
+      res.status(404).json({
+        message: "Review not found or you don't have permission to update it.",
+      });
     }
   } catch (error) {
     console.error("Error updating review:", error);
-    res.status(500).json({ message: "An error occurred while updating the review." });
+    res
+      .status(500)
+      .json({ message: "An error occurred while updating the review." });
   }
- }); 
-=======
+});
 // connect a route to list restaurants by category
 app.get("/api/items/:category-primary", async (req, res) => {
   const items = await fetchItems();
@@ -221,15 +224,12 @@ app.get("/api/items/:category-primary", async (req, res) => {
 
 // connect a route to update a comment
 app.put("/api/comments/:comment_id", async (req, res) => {
-  app.put("/api/comments", async (req, res) => {
-    const comment_id = req.params.id;
-    const { comment_text } =
-      req.body;
-    const reviseComment = await updateComment(
-      comment_text
-    );
-    res.status(200).json({ updateComment });
-  }) };
+  const id = req.params.id;
+  const { comment_text } = req.body;
+  const updateComment = await reviseComment(id, comment_text);
+  res.status(200).json({ updateComment });
+});
+
 const init = async () => {
   await client.connect();
   console.log("connected to database");
