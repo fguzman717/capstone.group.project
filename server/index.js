@@ -241,31 +241,31 @@ const init = async () => {
   await createTables();
   console.log("tables created");
 
-  await createItem({
-    item_name: "Pizza Hut",
-    item_imgurl:
-      "https://logos-world.net/wp-content/uploads/2021/10/Pizza-Hut-Logo.png",
-    item_category_primary: "Pizza",
-    item_category_secondary: "Dinner",
-  });
+  // await createItem({
+  //   item_name: "Pizza Hut",
+  //   item_imgurl:
+  //     "https://logos-world.net/wp-content/uploads/2021/10/Pizza-Hut-Logo.png",
+  //   item_category_primary: "Pizza",
+  //   item_category_secondary: "Dinner",
+  // });
 
-  await createItem({
-    item_name: "Starbucks",
-    item_imgurl:
-      "https://upload.wikimedia.org/wikipedia/en/d/d3/Starbucks_Corporation_Logo_2011.svg",
-    item_category_primary: "Coffee",
-    item_category_secondary: "Breakfast",
-  });
+  // await createItem({
+  //   item_name: "Starbucks",
+  //   item_imgurl:
+  //     "https://upload.wikimedia.org/wikipedia/en/d/d3/Starbucks_Corporation_Logo_2011.svg",
+  //   item_category_primary: "Coffee",
+  //   item_category_secondary: "Breakfast",
+  // });
 
-  await createItem({
-    item_name: "Waffle House",
-    item_imgurl:
-      "https://logos-world.net/wp-content/uploads/2023/08/Waffle-House-Logo.png",
-    item_category_primary: "Waffles",
-    item_category_secondary: "Breakfast",
-  });
+  // await createItem({
+  //   item_name: "Waffle House",
+  //   item_imgurl:
+  //     "https://logos-world.net/wp-content/uploads/2023/08/Waffle-House-Logo.png",
+  //   item_category_primary: "Waffles",
+  //   item_category_secondary: "Breakfast",
+  // });
 
-  console.log("data seeded");
+  // console.log("data seeded");
 };
 
 init();
