@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./RegisterLogin.css";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const baseURL = "APIURLGOESHERE";
 
@@ -68,6 +69,7 @@ const Register = ({ setToken }) => {
 
           <button type="submit">Register</button>
         </form>
+        <Link to="/login">Already have an account? Login!</Link>
       </div>
     </div>
   );
